@@ -1,0 +1,99 @@
+mysql -u root -p pixeluxApp -e "CREATE TABLE customers(id INT AUTO_INCREMENT PRIMARY KEY,name VARCHAR(100) CHARACTER SET utf8mb3 COLLATE utf8_unicode_ci,position VARCHAR(100) CHARACTER SET utf8mb3 COLLATE utf8_unicode_ci,rank VARCHAR(100) CHARACTER 
+SET utf8mb3 COLLATE utf8_unicode_ci ,address VARCHAR(100) CHARACTER SET utf8mb3 COLLATE utf8_unicode_ci,gender VARCHAR(100) CHARACTER SET utf8mb3 COLL
+ATE utf8_unicode_ci);"
+
+mysql -u root -p pixeluxApp -e "INSERT INTO customers(name,position,rank,address,gender) VALUE('TRAN TRUNG DUNG','KI THUAT VIEN','TRUNG SI','171 DAO DUY ANH','NAM'),('NGUYEN HOANG NAM','KI THUAT VIEN','TRUNG SI','171 DAO DUY ANH','NAM');"
+mysql -u root -p pixeluxApp -e"SELECT * FROM customers;"
+
+mysql -u root -p pixeluxApp -e"SELECT * FROM customers WHERE name = 'TRAN TRUNG DUNG';"
+
+mysql -u root -p pixeluxApp -e"SELECT * FROM customers WHERE name = 'TRAN TRUNG DUNG';
+
+mysql -u root -p pixeluxApp -e "CREATE TABLE size (id INT AUTO_INCREMENT PRIMARY KEY,name VARCHAR(100) CHARACTER SET utf8mb3 COLLATE utf8_unicode_ci,width INT,height INT);"
+mysql -u root -p pixeluxApp -e "INSERT INTO size(name,width,height) VALUE('800x480',800,480),('1200x640',1200,640);"
+
+mysql -u root -p pixeluxApp -e "SELECT * FROM size;"
+
+
+mysql -u root -p pixeluxApp -e " CREATE TABLE fields_text(id INT AUTO_INCREMENT PRIMARY KEY,name VARCHAR(100) CHARACTER SET utf8mb3 COLLATE utf8_unicode_ci,x_text INT,y_text INT,width_text INT,height_text INT,font VARCHAR(100) CHARACTER SET utf8mb3 COLLATE utf8_unicode_ci,size INT,align INT,align_font INT,color_text VARCHAR(100) CHARACTER SET utf8mb3 COLLATE utf8_unicode_ci,bg_text VARCHAR(100) CHARACTER SET utf8mb3 COLLATE utf8_unicode_ci,active INT);"
+mysql -u root -p pixeluxApp -e "SELECT * FROM fields_text;"
+mysql -u root -p pixeluxApp -e "AlTER TABLE fields_text ADD COLUMN data VARCHAR(100) CHARACTER SET utf8mb3 COLLATE utf8_unicode_ci;"
+mysql -u root -p pixeluxApp -e "INSERT INTO fields_text (name,x_text,y_text,width_text,height_text,font,size,align,align_font,color_text,bg_text,active,data) VALUE('text1',10,10,100,100,'Arial',10,1,1,'#000000','#ffffff',1,'Hello World');"
+
+mysql -u root -p pixeluxApp -e
+
+
+mysql -u root -p pixeluxApp -e " CREATE TABLE fields_picture(id INT AUTO_INCREMENT PRIMARY KEY,name VARCHAR(100) CHARACTER SET utf8mb3 COLLATE utf8_unicode_ci,x_picture INT,y_picture INT,width_picture INT,height_picture INT,name_picture VARCHAR(100) CHARACTER SET utf8mb3 COLLATE utf8_unicode_ci,brightness INT,transparency INT,active INT,id_canvas INT);"
+
+mysql -u root -p pixeluxApp -e "INSERT INTO fields_picture(name,x_picture,y_picture,width_picture,height_picture,name_picture,brightness,transparency,active) VALUE('picture1',10,10,100,100,'picture1.png',100,100,1);"
+
+mysql -u root -p pixeluxApp -e "SELECT * FROM fields_picture;"
+
+mysql -u root -p pixeluxApp -e "CREATE TABLE images(id INT AUTO_INCREMENT PRIMARY KEY,name VARCHAR(100) CHARACTER SET utf8mb3 COLLATE utf8_unicode_ci,file_path VARCHAR(255) CHARACTER SET utf8mb3 COLLATE utf8_unicode_ci,create_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);"
+
+mysql -u root -p pixeluxApp -e "INSERT INTO images(name) VALUE('image1.png');"
+
+mysql -u root -p pixeluxApp -e "CREATE TABLE fiels_qrcode(id INT AUTO_INCREMENT PRIMARY KEY,x_qrcode INT,y_qrcode INT,width_qrcode INT,height_qrcode INT,name VARCHAR(100) CHARACTER SET utf8mb3 COLLATE utf8_unicode_ci,data VARCHAR(100) CHARACTER SET utf8mb3 COLLATE utf8_unicode_ci,active INT);"
+
+
+mysql -u root -p pixeluxApp -e"CREATE TABLE canvas(id INT AUTO_INCREMENT PRIMARY KEY,name VARCHAR(100) CHARACTER SET utf8mb3 COLLATE utf8_unicode_ci,width INT,height INT,id_size INT,id_image INT,id_customer INT);"
+
+mysql -u root -p pixeluxApp -e"INSERT INTO canvas(name,width,height,id_size,id_image,id_customer) VALUE('canvas1',800,480,1,1,1);"
+
+mysql -u root -p pixeluxApp -e"SELECT * FROM canvas;"
+mysql -u root -p pixeluxApp -e"SELECT * FROM canvas WHERE id = 1;"
+
+mysql -u root -p pixeluxApp -e"SELECT * FROM canvas WHERE id = 1;"
+
+mysql -u root -p pixeluxApp -e"SELECT * FROM canvas WHERE id = 1;"
+
+mysql -u root -p pixeluxApp -e"INSERT INTO fiels_qrcode(x_qrcode,y_qrcode,width_qrcode,height_qrcode,name,data,active) VALUE (10,10,100,100,'qrcode1','https://www.google.com/',1);"
+
+mysql -u root -p pixeluxApp -e"SELECT * FROM fiels_qrcode;"
+mysql -u root -p pixeluxApp -e "AlTER TABLE fields_qrcode ADD COLUMN id_canvas INT ;"
+#files_barcode
+mysql -u root -p pixeluxApp -e "CREATE TABLE fields_barcode(
+id INT AUTO_INCREMENT PRIMARY KEY,
+x_barcode INT,
+y_barcode INT,
+width_barcode INT,
+height_barcode INT,
+name VARCHAR(100) CHARACTER SET utf8mb3 COLLATE utf8_unicode_ci,
+data VARCHAR(100) CHARACTER SET utf8mb3 COLLATE utf8_unicode_ci,
+active INT,
+id_canvas INT) ;"
+
+mysql -u root -p pixeluxApp -e"INSERT INTO fields_barcode(x_barcode,y_barcode,width_barcode,height_barcode,name,data,active,id_canvas) VALUE (10,10,100,100,'barcode1','12345678901234567890',1,1);"
+
+mysql -u root -p pixeluxApp -e"SELECT * FROM fields_barcode;"
+
+mysql -u root -p pixeluxApp -e"CREATE TABLE rooms (
+id INT AUTO_INCREMENT PRIMARY KEY,
+name VARCHAR(100) CHARACTER SET utf8mb3 COLLATE utf8_unicode_ci,
+id_customer INT,
+id_canvas INT,
+id_image INT,
+id_size INT,
+width INT,
+height INT,
+countCard INT,
+active INT,
+created_at DATETIME,
+updated_at DATETIME
+);"
+
+mysql -u root -p pixeluxApp-e"INSERT INTO(name,id_customer,id_canvas,id_size,id_image,width,height,countCard,active,create_at,updated_at)
+VALUE('1','2','3','4','5','6','7','8','8','9','04-26-2024','')
+
+mysql -u root -p pixeluxApp -e"SELECT * FROM rooms;"
+
+mysql -u root -p pixeluxApp -e"SELECT * FROM rooms WHERE id = 1;"
+
+mysql -u root -p pixeluxApp -e"SELECT * FROM rooms WHERE id = 1;
+
+mysql -u root -p pixeluxApp -e"CREATE TABLE images_bg(id INT AUTO_INCREMENT PRIMARY KEY,
+name VARCHAR(100) CHARACTER SET utf8mb3 COLLATE utf8_unicode_ci,
+file_path VARCHAR(100) CHARACTER SET utf8mb3 COLLATE utf8_unicode_ci );"
+
+mysql -u root -p pixeluxApp -e"INSERT INTO images_bg(name,file_path) VALUE('bg1','/assets/images/images_bg/bg1.jpg');
+mysql -u root -p pixeluxApp -e"SELECT * FROM images_bg;
